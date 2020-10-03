@@ -1,7 +1,8 @@
 import tweepy #https://github.com/tweepy/tweepy
 import json
+import yweather
 
-with open('../twitter_key.json') as f:
+with open('key/twitter_key.json') as f:
   data = json.load(f)
 
 #Twitter API credentials
@@ -57,30 +58,56 @@ def get_all_tweets(screen_name):
     print("Done")
     file.close()
 
-def myFUnc():
+def get_tweets(search_words):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_key, access_secret)
-    api = tweepy.API(auth, wait_on_rate_limit=True)
+    api = tweepy.API(auth)
 
-    search_words = "#cafire"
-    search_words = search_words + " -filter:retweets"
-
+    # search_words = "#cafire"
+    search_words =  search_words + " -filter:retweets"
+    print("twitter api searching for: ", search_words, flush=True)
 
     # Collect tweets
     tweets = tweepy.Cursor(api.search,
                 q=search_words,
                 lang="en",
-                ).items(5)
+                ).items(10)
+
+    # print(type(tweets))
     # Iterate and print tweets
-    index = 1
-    for tweet in tweets:
-        print(index, ": ", "=" * 20)
-        print(tweet.user.screen_name, tweet.user.location)
-        print(tweet.text)
-        index = index + 1
+    # index = 1
+    # for tweet in tweets:
+    #     print(index, ": ", "=" * 20)
+    #     print(tweet.user.screen_name, tweet.user.location)
+    #     print((tweet.text).encode("utf-8"))
+    #     index = index + 1
+    return tweets
+
+def top_hashtags(woeid):
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_key, access_secret)
+    api = tweepy.API(auth)
+
+    # data = api.trends_available()
+    data = api.trends_place(woeid)
+    tags = data[0]
+    trends = tags["trends"]
+    with open('main.json', 'w') as outfile:
+        json.dump(data, outfile)
+
+    retval = []
+    for tag in trends:
+        # print(tag['name'])
+        retval.append(tag['name'])
+    return retval
+
+# this doesn't work, sadly
+def get_woeid(location):
+    client = yweather.Client()
+    client.fetch_woeid(location)
 
 if __name__ == '__main__':
-    #pass in the username of the account you want to download
-    # get_all_tweets("@Ibra_official")
-    myFUnc()
+    # get_tweets("Mezzaluna bangkok")
+    # Boston, USA woeid
+    top_hashtags(2367105)
     
