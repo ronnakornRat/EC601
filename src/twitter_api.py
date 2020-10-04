@@ -11,71 +11,23 @@ consumer_secret = data["API key secret"]
 access_key = data["Access token"]
 access_secret = data["Access token secret"]
 
-
-def get_all_tweets(screen_name):
-    
-    #Twitter only allows access to a users most recent 3240 tweets with this method
-    
-    #authorize twitter, initialize tweepy
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_key, access_secret)
-    api = tweepy.API(auth)
-    
-    #initialize a list to hold all the tweepy Tweets
-    alltweets = []    
-    
-    #make initial request for most recent tweets (200 is the maximum allowed count)
-    new_tweets = api.user_timeline(screen_name = screen_name,count=10)
-    
-    #save most recent tweets
-    alltweets.extend(new_tweets)
-    
-    #save the id of the oldest tweet less one
-    oldest = alltweets[-1].id - 1
-    
-    #keep grabbing tweets until there are no tweets left to grab
-    while len(new_tweets) > 0:
-        
-        #all subsiquent requests use the max_id param to prevent duplicates
-        new_tweets = api.user_timeline(screen_name = screen_name,count=10,max_id=oldest)
-        
-        #save most recent tweets
-        alltweets.extend(new_tweets)
-        
-        #update the id of the oldest tweet less one
-        oldest = alltweets[-1].id - 1
-        if(len(alltweets) > 15):
-            break
-        print ("...%s tweets downloaded so far" % (len(alltweets)))
-       
-    #write tweet objects to JSON
-    file = open('tweet.json', 'w') 
-    print ("Writing tweet objects to JSON please wait...")
-    for status in alltweets:
-        json.dump(status._json,file,sort_keys = True,indent = 4)
-    
-    #close the file
-    print("Done")
-    file.close()
-
+# return the tweets 
 def get_tweets(search_words):
+    max_item = 100
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_key, access_secret)
     api = tweepy.API(auth)
 
-    # search_words = "#cafire"
     search_words =  search_words + " -filter:retweets"
-    print("twitter api searching for: ", search_words, flush=True)
+    # print("twitter api searching for: ", search_words, flush=True)
 
     # Collect tweets
     tweets = tweepy.Cursor(api.search,
                 q=search_words,
                 lang="en",
-                ).items(10)
+                ).items(max_item)
 
-    # print(type(tweets))
     # Iterate and print tweets
-    # index = 1
     # for tweet in tweets:
     #     print(index, ": ", "=" * 20)
     #     print(tweet.user.screen_name, tweet.user.location)
@@ -83,12 +35,15 @@ def get_tweets(search_words):
     #     index = index + 1
     return tweets
 
+# return top trends keywords
 def top_hashtags(woeid):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_key, access_secret)
     api = tweepy.API(auth)
 
     # data = api.trends_available()
+
+    # get trends according to woeid
     data = api.trends_place(woeid)
     tags = data[0]
     trends = tags["trends"]
@@ -97,17 +52,10 @@ def top_hashtags(woeid):
 
     retval = []
     for tag in trends:
-        # print(tag['name'])
         retval.append(tag['name'])
     return retval
 
-# this doesn't work, sadly
-def get_woeid(location):
-    client = yweather.Client()
-    client.fetch_woeid(location)
-
 if __name__ == '__main__':
-    # get_tweets("Mezzaluna bangkok")
     # Boston, USA woeid
     top_hashtags(2367105)
     

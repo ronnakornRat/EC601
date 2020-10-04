@@ -2,36 +2,10 @@ import google_api
 import twitter_api
 import json
 import re
+import pandas as pd
 
-def get_restaurant(search_words):
-    results = google_api.find_place(search_words)
-
-    i = 0
-    for place in results["results"]:
-        string = place["name"] + " " + search_words
-        print("search for: ", string)
-        tweets = twitter_api.get_tweets(place["name"])
-
-        print("sending tweets to Google NLP API")
-        for tweet in tweets:
-            print(remove_url(tweet.text))
-            google_api.analyze_text_sentiment(remove_url(tweet.text))
-
-
-        i = i +1
-        if (i ==10):
-            break
-        
-
-    #write tweet objects to JSON
-    # with open('main.json', 'w') as outfile:
-    #     json.dump(tweets, outfile)
-
-    # print("sending tweets to Google NLP API")
-    # for tweet in tweets:
-    #     print(remove_url(tweet.text))
-    #     google_api.analyze_text_sentiment(remove_url(tweet.text))
-
+import matplotlib.pyplot as plt
+from statistics import mean
 
 # credits: https://www.earthdatascience.org/courses/use-data-open-source-python/intro-to-apis/calculate-tweet-word-frequencies-in-python/
 def remove_url(txt):
@@ -51,23 +25,42 @@ def remove_url(txt):
     return " ".join(re.sub("([^0-9A-Za-z \t])|(\w+:\/\/\S+)", "", txt).split())
 
 if __name__ == '__main__':
-    # get_restaurant("Boston")
+    # limit number of tags
+    max_tag = 5
+
+    # Boston, USA woeid
     tag_list = twitter_api.top_hashtags(2367105)
+
+    # check the list of tags in main.json
     with open('main.json', 'w') as outfile:
         json.dump(tag_list, outfile)
-    for index, tag in enumerate(tag_list):
-        print("\n",index + 1, ". tag: ", tag, flush=True)
-        tweets = twitter_api.get_tweets(tag)
-        # index = 1
-        mean_score = 0
-        for tweet in tweets:
-            # print(index, ": ", "=" * 20)
-            # print(tweet.user.screen_name, tweet.user.location)
-            # print(remove_url(tweet.text).encode("utf-8"))
-            
 
-            mean_score = google_api.analyze_text_sentiment(remove_url(tweet.text))
-            # index = index + 1
-        print("mean sentiment: ", mean_score/(index + 1), flush=True)
-        if (index == 5):
+
+    for index, tag in enumerate(tag_list):
+        if (index == max_tag):
             break
+
+        print("\n",index + 1 , ". tag:", tag, flush=True)
+        tweets = twitter_api.get_tweets(tag)
+
+        score_list = []
+        for tweet in tweets:
+            text = remove_url(tweet.text)
+            # print("text: ", text, flush = True)
+            try:
+                score = google_api.analyze_text_sentiment(text)
+            except Exception as e: 
+                print("google api: error processing text")
+                print("\"" + text + "\"", flush = True)
+            score_list.append(score)
+
+        # plot the sentiment score in histrogram
+        plt.hist(score_list, bins=20)
+        plt.title(tag)
+        # save the plot in figure folder
+        plt.savefig("figure/" + tag + ".png")
+        plt.clf()
+        # print out the sentiment score
+        print("mean sentiment: ", mean(score_list), flush=True)
+        
+    
