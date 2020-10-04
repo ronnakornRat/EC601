@@ -65,35 +65,27 @@ def classify_text(text):
         print('category  : {}'.format(category.name))
         print('confidence: {:.0%}'.format(category.confidence))
 
-def find_place(search_term):
-    # files = [f for f in os.listdir('.') if os.path.isfile(f)]
-    # for f in files:
-    #     print(f)
+### unused API, take location input and return nearby restaurnat name
+# def find_place(search_term):
 
-    with open("key/googlemaps_key.json") as f:
-        data = json.load(f)
 
-    gmaps = googlemaps.Client(key = data["API key"])
+#     with open("key/googlemaps_key.json") as f:
+#         data = json.load(f)
 
-    # geocode_result = gmaps.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
-    response = gmaps.places(query = search_term, radius = 40000 , type = 'restaurant')
-    results = response["results"]
+#     gmaps = googlemaps.Client(key = data["API key"])
 
-    data = { "results" : []}
-    for result in results:
-        place_name = result["name"]
-        google_rating = result["rating"]
+#     response = gmaps.places(query = search_term, radius = 40000 , type = 'restaurant')
+#     results = response["results"]
+
+#     data = { "results" : []}
+#     for result in results:
+#         place_name = result["name"]
+#         google_rating = result["rating"]
            
-        # appending the data 
-        data["results"].append({"name" : result["name"], "g_rating" : result["rating"]})
+#         # appending the data 
+#         data["results"].append({"name" : result["name"], "g_rating" : result["rating"]})
 
-    # result = requests.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=' + data["API key"])
-    # pprint.pprint(geocode_result)
-    # pprint.pprint(result)
-    # with open('google_places.json', 'w') as outfile:
-    #     json.dump(data, outfile)
-
-    return data
+#     return data
 
 
 if __name__ == '__main__':

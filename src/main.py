@@ -55,8 +55,12 @@ if __name__ == '__main__':
             score_list.append(score)
 
         # plot the sentiment score in histrogram
-        plt.hist(score_list, bins=20)
+        fig, ax = plt.subplots()
+
+        n, bins, patches = plt.hist(score_list, bins=[-1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 ])
+        plt.xticks(bins, rotation=80)
         plt.title(tag)
+        fig.tight_layout()
         # save the plot in figure folder
         plt.savefig("figure/" + tag + ".png")
         plt.clf()

@@ -130,4 +130,8 @@ dmypy.json
 
 # code secret
 dummy.py
-key.json
+key/*
+main.json
+google_places.json
+.vscode/
+figure/*
