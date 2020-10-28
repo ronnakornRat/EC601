@@ -11,3 +11,5 @@ any content creators looking for currently popular topics to write/create/mentio
 
 ## some user stories
 a journalist might want to check the hottest trends in twiiter to write about in his/her next work. At the same time, the journalist can check the current sentiment of people towards the topics and, depending on the goal, may decide to ride along those sentiments or oppose it.
+
+## Adding test code...
