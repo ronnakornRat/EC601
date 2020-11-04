@@ -1,6 +1,5 @@
 import tweepy #https://github.com/tweepy/tweepy
 import json
-import yweather
 
 with open('key/twitter_key.json') as f:
   data = json.load(f)
@@ -57,5 +56,10 @@ def top_hashtags(woeid):
 
 if __name__ == '__main__':
     # Boston, USA woeid
-    top_hashtags(2367105)
+    # top_hashtags(2367105)
+    search_words = "#Boston"
+    tweets = get_tweets(search_words)
+    for tweet in tweets:
+        print((tweet.text).encode("utf-8"))
+        print("\n")
     

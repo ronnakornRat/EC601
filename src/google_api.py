@@ -6,7 +6,6 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "key/google_nlp_key.json"
 from google.cloud import language
 from google.cloud.language import enums, types
 
-import googlemaps 
 import json
 import requests
 import pprint
@@ -22,11 +21,12 @@ def analyze_text_sentiment(text):
     response = client.analyze_sentiment(document=document)
 
     sentiment = response.document_sentiment
-    results = [
-        ('text', text),
-        ('score', sentiment.score),
-        ('magnitude', sentiment.magnitude),
-    ]
+    # debug printing
+    # results = [
+    #     ('text', text),
+    #     ('score', sentiment.score),
+    #     ('magnitude', sentiment.magnitude),
+    # ]
     # for k, v in results:
     #     print('{:10}: {}'.format(k, v))
 
@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
     # try:
     #     print("Analyzing sentiment")
-    analyze_text_sentiment(text)
+    analyze_text_sentiment("Here's to the crazy ones. The misfits. The rebels. The troublemakers. The round pegs in the square holes. The ones who see things differently. They're not fond of rules. And they have no respect for the status quo. You can quote them, disagree with them, glorify or vilify them. About the only thing you can't do is ignore them. Because they change things. They push the human race forward. And while some may see them as the crazy ones, we see genius. Because the people who are crazy enough to think they can change the world, are the ones who do.")
     #     print("\nAnalyzing entities")
     #     analyze_text_entities(text)
     #     print("\nAnalyzing classification")

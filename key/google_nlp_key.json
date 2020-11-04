@@ -1,1 +1,12 @@
-// your google NLP key goes here
+{
+  "type": "service_account",
+  "project_id": "project-2-nlp",
+  "private_key_id": "a0e5698d40769742f1b6aec9ed4a05f07c82d081",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC+QQ1kl577xB6V\niUxni7G5jkWvFiCgdmhQZjJA4SFBGhJb7dRF+0498KNm0B7uisQeJbE/3UmBmN4k\n7z1zn62b8dYugale+hbTcDwgNmivS5dNnOvKDQubN4jmPQqgja/xOUjsglPDMHgr\nzzupZ8QzydIimwz+nCAFXtHdmu8mf2j+LBT8dbN4m5NBbFDXedUeczJ3D7DIkoDw\nJshTOavvfCFk9RcUtKwpB+8008+9yQz+rtKDktdLPkLrwwLRLJ26ucFc9GtQ+H8J\nnSQz3OmfYdoBHyELBnxt/UCARa1D+vEwOWDKHL90v6nh/eVQRGhy/eFdtMqneN7o\nXXRmFYG3AgMBAAECggEAWcGp9l+bty5uuWCVZbJfbemjkXcQfHNwQiH8qmQrwqFw\nsOMShtOJNaqeBEbCmQppfMmOhlE5OQVsJCOkK7TU/GHLCJTOWYsGEsl77DyPBchV\nQN371Y5y/87i7LA2n8lIjLbYYxAXQVpQD2cMwB6+zynzU7Uvm7z/VFlIDFLoaZHX\nAyeNvvM+TDdqMZ98dgqOTuicxP6NT35jFgFqnPu+io4D6FbD0YmyB+fbELcGiAGj\nxH4PqD83/Vd6Rgwmyi5HWSNMLJUDWnmpF+4T12ZRlk28t1wXBWgqrMaEG3EBIVh+\nPtIeO0ST63Ak9cBoVU2vHld+9wbzz/CzaE8J7/7RxQKBgQD/GxQ1f3ELzsLWPO7i\nb/JldFIliXdWZiUAHgD0L3eDgaGm03UiAEytgQzuPHT7iUxKYVv0+pWeZaYhGpe9\nV4u3a+oGxq9NgLspAMLSAFjv7dD0frED2so36X7w2n8DwJbDVMOl9BWF0HUs3GUh\nIt4f4Vm+gP97CL0G0ipRL0kjRQKBgQC+68c7fmrlehUpQmz+vxrNSPDrGZdsVsOT\nVvGfk3RdU5TAH9IItWyMT5Pg85V8d69fYCIM5bhcbvLcjln1ZNqVwhk/PkqD9BuT\nEZDgcd6fgjgfxyvAjK6tfWAUCpk/JtnLHACXKMDsdx6sHlAp9aa67gOf/J2CAPQC\n98e0ZpACywKBgDumPUd1ER3NrskhXkocGvWWCU81oW3WXHh2i4qNPsjFGuNDNnRI\n1aUMM9XQ1RmrtOb/dN0Hasyqv/mlmi1vtv+ggAwtkPfyTdD8mJE5+5G+bcl9hi58\njiQcuM3giSp7ccUioMzBEfdEEuH2dr8UxBN4Qd/FkfdWx7w8kCCDifpxAoGAOPzT\nyVRgwAKC0n/7XMbaTzBYiTRoWHRFiHNJSCKRd1H9cqOM5ACTWAZg06Khmjd3Z3ag\nc00WjLCpWWA8Rd1GybDYLGKBh4WTvYBeyD/0/ZO3APVIf/7+HNbxmMnZGFqWY+QF\n4RjPDUY5J5McxomGrQFin5ydvzJdo40mVRjQH6UCgYEAysW06x+rKDNrTLPVzv/O\n8zAtbw4waKSVK7Io1Uc6aW7dVOu/8POqNCM89B+um+uj0hNhxkEFBYw4DJunYi2P\nv6WTNs8gK/tI/kmRQDEmTe87R/JuTr9+lsOJBldgXYg9f51d80PXT36bRYcV/gQ7\nSYpsxMXRnP/AVeZuA43xBno=\n-----END PRIVATE KEY-----\n",
+  "client_email": "ronnakorn@project-2-nlp.iam.gserviceaccount.com",
+  "client_id": "103140586361624506296",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ronnakorn%40project-2-nlp.iam.gserviceaccount.com"
+}

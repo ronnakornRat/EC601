@@ -2,7 +2,7 @@ import google_api
 import twitter_api
 import json
 import re
-import pandas as pd
+# import pandas as pd
 
 import matplotlib.pyplot as plt
 from statistics import mean
@@ -49,10 +49,11 @@ if __name__ == '__main__':
             # print("text: ", text, flush = True)
             try:
                 score = google_api.analyze_text_sentiment(text)
+                score_list.append(score)
             except Exception as e: 
                 print("google api: error processing text")
                 print("\"" + text + "\"", flush = True)
-            score_list.append(score)
+            
 
         # plot the sentiment score in histrogram
         fig, ax = plt.subplots()
