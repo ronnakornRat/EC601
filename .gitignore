@@ -130,7 +130,6 @@ dmypy.json
 
 # code secret
 dummy.py
-key/
 main.json
 google_places.json
 .vscode/
